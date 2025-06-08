@@ -11,11 +11,44 @@
 </style>
     
 <h1></h1><center><div class="welcome"><font color="#FFFFFF">Unlimited Right To Build</font></div></center></h1>
-  <button id="launch-button" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 10px 20px; background: #0e639c; color: #fff; border: none; cursor: pointer;">🚀 Launch</button>
+  <style>
+  #launch-button {
+    position: absolute;
+    bottom: 80px; /* Increased distance from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: #0e639c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  #launch-button:hover {
+    background: #1177bb;
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  #launch-button:active {
+    transform: translateX(-50%) scale(0.97);
+  }
+</style>
+
+<button id="launch-button" aria-label="Launch the Orgena Engine site">
+  🚀 Launch
+</button>
+
 <script>
   document.getElementById("launch-button").addEventListener("click", () => {
     window.location.href = "https://hpd666.github.io/OrgenaEngine-Site/";
   });
+</script>
+
 </script>
         
 </body>
