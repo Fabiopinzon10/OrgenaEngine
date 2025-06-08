@@ -550,114 +550,143 @@
     input = input.toLowerCase();
     let response = "Sorry, I didn't understand that. Try asking about features or support.";
 
-    if (input.includes('features')) {
-  response = "Orgena Engine supports 2D/3D rendering, physics, scripting, VR, multiplayer, and more.";
-} else if (input.includes('license')) {
-  response = "Orgena Engine is fully open source under the MIT License.";
-} else if (input.includes('community')) {
-  response = "We have an active GitHub repo and Discord server where contributors gather.";
-} else if (input.includes('support')) {
-  response = "Check out our docs online or contact support@orgenastudio.com.";
-} else if (input.includes('hello') || input.includes('hi')) {
-  response = "Hello! How can I assist you with Orgena Engine today?";
-} else if (input.includes("security")) {
-  response = "You may check the Security Policy of my repo from the hub.";
-} else if (input.includes("how") && input.includes("use")) {
-  response = "If you're asking how to use it, you can try the demo by clicking on the launch button.";
-} else if (input.includes('download')) {
-  response = "You can download the latest version of Orgena Engine from our GitHub releases page.";
-} else if (input.includes('documentation') || input.includes('docs')) {
-  response = "Our complete documentation is available online at [Insert Link Here].";
-} else if (input.includes('tutorial')) {
-  response = "You can find tutorials for both beginners and advanced users on our website.";
-} else if (input.includes('bug') || input.includes('issue')) {
-  response = "If you encounter a bug or issue, please report it on our GitHub issues page.";
-} else if (input.includes('performance')) {
-  response = "Orgena Engine is optimized for performance, with support for various graphical and computational enhancements.";
-} else if (input.includes('multiplayer')) {
-  response = "Orgena Engine supports multiplayer functionality, including dedicated server support and peer-to-peer networking.";
-} else if (input.includes('VR')) {
-  response = "Orgena Engine supports full Virtual Reality integration with a variety of VR headsets.";
-} else if (input.includes('2D') && input.includes('game')) {
-  response = "Creating 2D games with Orgena Engine is simple and intuitive, thanks to our user-friendly scene system and built-in physics.";
-} else if (input.includes('3D') && input.includes('game')) {
-  response = "Developing 3D games is easy with Orgena Engine's advanced 3D rendering pipeline, physics engine, and asset management system.";
-} else if (input.includes('scripting')) {
-  response = "Orgena Engine supports scripting in [insert language here]. You can write scripts for game logic, AI, and more.";
-} else if (input.includes('graphics')) {
-  response = "With Orgena Engine, you can achieve high-quality graphics for both 2D and 3D games, with built-in support for shaders.";
-} else if (input.includes('physics')) {
-  response = "Our physics engine provides realistic object collisions, gravity, and other dynamic interactions.";
-} else if (input.includes('networking')) {
-  response = "Orgena Engine includes a powerful networking library to create multiplayer games, from simple LAN setups to large-scale online games.";
-} else if (input.includes('debugging')) {
-  response = "We offer various debugging tools, including a built-in profiler and error logs, to help you quickly identify issues in your game.";
-} else if (input.includes('mobile')) {
-  response = "Orgena Engine supports deployment to mobile platforms like iOS and Android, with touch controls and mobile-optimized features.";
-} else if (input.includes('console')) {
-  response = "Orgena Engine allows for easy deployment to consoles, with optimized rendering and performance for platforms like PlayStation and Xbox.";
-} else if (input.includes('web')) {
-  response = "You can export your Orgena Engine game to run directly in a web browser using WebAssembly or HTML5.";
-} else if (input.includes('asset store')) {
-  response = "Check out the Orgena Engine Asset Store for a wide range of free and paid assets you can use in your projects.";
-} else if (input.includes('events')) {
-  response = "Orgena Engine supports event-driven programming, allowing you to easily create complex interactions and responses in your game.";
-} else if (input.includes('AI')) {
-  response = "You can create intelligent NPCs with our built-in AI tools, including pathfinding, decision trees, and behavior trees.";
-} else if (input.includes('animation')) {
-  response = "Orgena Engine supports both 2D and 3D animations, with keyframe-based animation systems and skeleton rigs for characters.";
-} else if (input.includes('scripting tutorial')) {
-  response = "We have a detailed scripting tutorial that will guide you through creating your first game scripts. Check it out on our website!";
-} else if (input.includes('API')) {
-  response = "The Orgena Engine API documentation is available on our website and includes detailed information about all available functions.";
-} else if (input.includes('UI')) {
-  response = "You can create custom UI elements in Orgena Engine using our built-in UI toolkit, including buttons, text fields, and more.";
-} else if (input.includes('asset pipeline')) {
-  response = "Orgena Engine has a powerful asset pipeline for importing, managing, and optimizing assets like textures, models, and sounds.";
-} else if (input.includes('shaders')) {
-  response = "You can write custom shaders in Orgena Engine using GLSL or HLSL, depending on your platform.";
-} else if (input.includes('lightning')) {
-  response = "Orgena Engine supports dynamic and static lighting, with features like shadows, ambient occlusion, and global illumination.";
-} else if (input.includes('sound')) {
-  response = "You can add sound effects and background music to your games, with full support for 3D audio and sound mixing.";
-} else if (input.includes('camera')) {
-  response = "Orgena Engine has a powerful camera system that allows for first-person, third-person, and custom perspectives in both 2D and 3D.";
-} else if (input.includes('export')) {
-  response = "You can export your game to multiple platforms, including Windows, macOS, Linux, Web, and mobile platforms like Android and iOS.";
-} else if (input.includes('scene')) {
-  response = "The scene system in Orgena Engine allows you to easily organize and manage your game world, with support for hierarchies, lights, and cameras.";
-} else if (input.includes('performance optimization')) {
-  response = "Orgena Engine includes a set of performance profiling and optimization tools to help you keep your games running smoothly on all platforms.";
-} else if (input.includes('version')) {
-  response = "You can check the version of Orgena Engine you are using by visiting the 'About' section in the settings menu.";
-} else if (input.includes('updates')) {
-  response = "We release regular updates to Orgena Engine with new features, bug fixes, and performance improvements. Keep an eye on our GitHub!";
-} else if (input.includes('contributing')) {
-  response = "We welcome contributions to Orgena Engine! Check out our contribution guidelines on GitHub to get started.";
-} else if (input.includes('roadmap')) {
-  response = "You can view the Orgena Engine development roadmap on our website to see what's coming in future releases.";
-} else if (input.includes('input handling')) {
-  response = "Orgena Engine supports multiple input methods, including keyboard, mouse, gamepad, and touch input for mobile and tablet devices.";
-} else if (input.includes('localization')) {
-  response = "You can localize your game by using Orgena Engine’s built-in support for multiple languages, allowing your game to reach a global audience.";
-} else if (input.includes('custom controls')) {
-  response = "You can create custom control schemes in Orgena Engine, supporting a wide variety of gamepads, joysticks, and other input devices.";
-} else if (input.includes('plugins')) {
-  response = "Extend the functionality of Orgena Engine with plugins. You can either create your own or use existing plugins from the community.";
-} else if (input.includes('cross-platform')) {
-  response = "Orgena Engine is designed to be cross-platform, enabling you to develop and deploy games to Windows, macOS, Linux, Web, mobile, and more!";
-} else if (input.includes('save/load system')) {
-  response = "Orgena Engine provides built-in support for saving and loading game progress, with options for saving player data and game states.";
-} else if (input.includes('performance testing')) {
-  response = "You can use Orgena Engine's performance testing tools to measure frame rates, memory usage, and CPU/GPU performance during development.";
-} else if (input.includes('game state management')) {
-  response = "Orgena Engine provides robust tools for managing different game states (e.g., menu, gameplay, pause), ensuring smooth transitions and state persistence.";
-} else if (input.includes('project structure')) {
-  response = "Orgena Engine follows a modular project structure, allowing you to easily organize assets, scripts, and scenes in a way that makes sense for your project.";
-} else {
-  response = "Sorry, I didn’t quite catch that. Can you please rephrase your question or provide more details?";
+ // Rendering & Graphics
+if (input.includes('rendering') || input.includes('graphics')) {
+  response = "Orgena Engine supports both forward and deferred rendering pipelines, allowing you to achieve photorealistic visuals or stylized 2D/3D effects.";
+} else if (input.includes('lighting')) {
+  response = "You can use both dynamic and static lighting systems in Orgena Engine, including baked lighting for optimized performance in large scenes.";
+} else if (input.includes('shadows')) {
+  response = "Our shadow system includes support for soft shadows, cascaded shadow maps, and dynamic shadow casting for both 2D and 3D games.";
+} else if (input.includes('post-processing')) {
+  response = "Orgena Engine includes an extensive suite of post-processing effects, including bloom, motion blur, depth of field, and color grading.";
+} else if (input.includes('shader programming')) {
+  response = "You can create custom shaders in Orgena Engine using GLSL, HLSL, or shader graph tools for visual programming.";
+} else if (input.includes('render target')) {
+  response = "Render targets in Orgena Engine allow you to create offscreen rendering effects, such as reflection, refraction, and shadow mapping.";
+} else if (input.includes('environment mapping')) {
+  response = "Orgena Engine includes built-in support for environmental mapping techniques like cubemaps and reflection probes.";
+} else if (input.includes('material system')) {
+  response = "Orgena Engine's material system supports advanced features like PBR (Physically Based Rendering), allowing you to create realistic materials.";
+} else if (input.includes('depth of field')) {
+  response = "You can simulate depth of field in Orgena Engine to enhance the cinematic look of your game’s camera view.";
+} else if (input.includes('anti-aliasing')) {
+  response = "Our engine supports multiple anti-aliasing techniques, such as FXAA, TAA, and MSAA, to provide smooth edges in your game visuals.";
+} 
+
+// Scripting & Game Logic
+else if (input.includes('scripting language')) {
+  response = "Orgena Engine supports scripting with [insert language] for both game logic and editor customization.";
+} else if (input.includes('AI programming')) {
+  response = "Orgena Engine includes tools to easily implement AI behaviors using Finite State Machines, Behavior Trees, or Utility AI.";
+} else if (input.includes('pathfinding')) {
+  response = "Orgena Engine supports advanced pathfinding using A* and navigation meshes to allow characters to move intelligently in 3D spaces.";
+} else if (input.includes('game logic')) {
+  response = "Game logic can be scripted using our powerful event-driven system, making it easy to trigger actions based on player input or game state.";
+} else if (input.includes('input mapping')) {
+  response = "You can map various input devices in Orgena Engine, including keyboard, mouse, gamepads, and touch, with support for custom input schemes.";
+} else if (input.includes('game loop')) {
+  response = "The Orgena Engine’s game loop is highly customizable, allowing you to control every frame, input, update, and render cycle.";
+} else if (input.includes('serialization')) {
+  response = "Orgena Engine provides an easy way to serialize objects, allowing you to save and load game states, player data, and world configurations.";
+} else if (input.includes('object pooling')) {
+  response = "Orgena Engine includes support for object pooling, reducing memory overhead and improving performance in games with many dynamic objects.";
+} else if (input.includes('events system')) {
+  response = "Our event system is designed for managing triggers and responses in your game, from simple button presses to complex in-game events.";
+} else if (input.includes('custom scripts')) {
+  response = "You can create and attach custom scripts to any object in your game, giving you full control over interactions, behaviors, and logic.";
 }
 
+// Multiplayer & Networking
+else if (input.includes('multiplayer')) {
+  response = "Orgena Engine provides robust multiplayer support, including real-time synchronization, matchmaking, and networked physics.";
+} else if (input.includes('server setup')) {
+  response = "Setting up a server in Orgena Engine is easy with built-in dedicated server tools and network sync for game states and player actions.";
+} else if (input.includes('latency')) {
+  response = "Orgena Engine has optimizations for low-latency multiplayer, including network prediction, lag compensation, and smooth synchronization.";
+} else if (input.includes('peer-to-peer networking')) {
+  response = "Orgena Engine supports peer-to-peer networking for games where players host their own servers, with built-in NAT punch-through and matchmaking.";
+} else if (input.includes('game server hosting')) {
+  response = "You can host your own game servers or use third-party services, with full support for server management and scaling in Orgena Engine.";
+} else if (input.includes('networking API')) {
+  response = "Our networking API allows you to implement custom multiplayer logic, such as lobby management, player synchronization, and RPC calls.";
+} else if (input.includes('cross-platform networking')) {
+  response = "Orgena Engine supports cross-platform networking, enabling multiplayer games between Windows, macOS, Linux, and mobile players.";
+} else if (input.includes('voice chat')) {
+  response = "Orgena Engine includes optional voice chat integration for multiplayer games, supporting spatial audio and voice over IP (VoIP).";
+} else if (input.includes('dedicated server')) {
+  response = "Orgena Engine supports dedicated server hosting, allowing for smooth and reliable multiplayer gameplay for hundreds of players.";
+} else if (input.includes('network synchronization')) {
+  response = "Network synchronization ensures that players' actions and the game state stay in sync across all connected clients in real-time.";
+}
+
+// Performance & Optimization
+else if (input.includes('performance')) {
+  response = "Orgena Engine is optimized for high performance, with support for batching, culling, and GPU optimizations to ensure smooth gameplay.";
+} else if (input.includes('framerate')) {
+  response = "You can easily monitor and optimize the framerate in Orgena Engine using our built-in performance profiler and rendering tools.";
+} else if (input.includes('memory management')) {
+  response = "Orgena Engine provides memory management tools that help you efficiently load and unload assets during gameplay, minimizing memory usage.";
+} else if (input.includes('asset streaming')) {
+  response = "Orgena Engine supports asset streaming, enabling you to dynamically load and unload game assets based on player proximity and actions.";
+} else if (input.includes('GPU optimization')) {
+  response = "Optimize your game’s GPU performance using Orgena Engine's support for LOD (Level of Detail), instancing, and optimized texture formats.";
+} else if (input.includes('CPU optimization')) {
+  response = "Orgena Engine supports multi-threading and efficient CPU utilization, allowing your game to run smoothly even with complex simulations.";
+} else if (input.includes('batching')) {
+  response = "We use automatic batching to reduce draw calls, improving rendering performance by grouping similar objects into a single call.";
+} else if (input.includes('culling')) {
+  response = "Frustum culling and occlusion culling are built-in to ensure that only visible objects are rendered, improving performance in large scenes.";
+} else if (input.includes('profiling tools')) {
+  response = "Orgena Engine comes with built-in profiling tools, allowing you to monitor CPU, GPU, and memory usage for real-time performance optimization.";
+} else if (input.includes('threading')) {
+  response = "Our engine is optimized for multi-threading, allowing heavy computations to run on separate threads for better CPU utilization.";
+}
+
+// Platform Deployment & Export
+else if (input.includes('platform support')) {
+  response = "Orgena Engine supports deployment to a wide range of platforms, including Windows, macOS, Linux, iOS, Android, Web, and Consoles.";
+} else if (input.includes('export options')) {
+  response = "You can export your game to various platforms with a single click, including PC, mobile, web browsers, and consoles.";
+} else if (input.includes('console deployment')) {
+  response = "Deploy your games to consoles such as PlayStation, Xbox, and Nintendo Switch using Orgena Engine’s platform-specific export options.";
+} else if (input.includes('web deployment')) {
+  response = "Orgena Engine allows you to export games to the web, with support for WebAssembly and HTML5 for browser-based games.";
+} else if (input.includes('mobile deployment')) {
+  response = "Easily export your game to iOS and Android with Orgena Engine's mobile deployment system, including touch control support.";
+} else if (input.includes('cloud deployment')) {
+  response = "Orgena Engine integrates with cloud platforms for scalable hosting, multiplayer synchronization, and asset streaming.";
+} else if (input.includes('gamepad support')) {
+  response = "We have full support for gamepads and other input devices on all platforms, allowing for seamless cross-platform gameplay.";
+} else if (input.includes('VR support')) {
+  response = "Orgena Engine includes native support for VR headsets like Oculus Rift, HTC Vive, and PlayStation VR, with built-in VR optimizations.";
+} else if (input.includes('AR support')) {
+  response = "Augmented Reality (AR) is supported, with tools to overlay virtual objects on the real world, perfect for mobile AR experiences.";
+} else if (input.includes('native UI')) {
+  response = "Orgena Engine supports native UI elements for each platform, ensuring your game’s user interface feels right at home on any device.";
+} 
+
+// Game Design & Features
+else if (input.includes('level design')) {
+  response = "Orgena Engine offers powerful level design tools, including terrain editing, object placement, and a visual scripting interface for gameplay logic.";
+} else if (input.includes('puzzle games')) {
+  response = "Orgena Engine supports the creation of puzzle games with tools for physics interactions, complex triggers, and event-based game mechanics.";
+} else if (input.includes('RPG mechanics')) {
+  response = "You can easily implement RPG mechanics such as character stats, inventory systems, and quests using Orgena Engine’s flexible scripting tools.";
+} else if (input.includes('action games')) {
+  response = "For action games, Orgena Engine provides high-performance physics and rendering systems to create fast-paced, action-packed gameplay.";
+} else if (input.includes('simulation games')) {
+  response = "Create realistic simulations with Orgena Engine, including vehicle physics, weather systems, and life simulation mechanics.";
+} else if (input.includes('strategy games')) {
+  response = "Orgena Engine has built-in pathfinding, AI, and resource management tools ideal for creating complex strategy games.";
+} else if (input.includes('puzzle mechanics')) {
+  response = "Orgena Engine allows you to create complex puzzle mechanics using event-driven scripting, physics interactions, and state machines.";
+} else if (input.includes('multiplayer co-op')) {
+  response = "Orgena Engine supports multiplayer co-op gameplay, allowing players to team up and complete missions or challenges together.";
+} else if (input.includes('combat system')) {
+  response = "You can create complex combat systems, from melee to ranged, with Orgena Engine's robust animation, AI, and physics systems.";
+} else if (input.includes('dialogue system')) {
+  response = "Orgena Engine includes a dialogue system to manage NPC interactions, branching dialogue choices, and quest-driven storytelling.";
+}
 
     appendMessage('bot', response);
   }
