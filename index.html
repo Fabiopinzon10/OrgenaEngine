@@ -317,9 +317,49 @@
     <button id="launch-button" onclick="window.location.href='https://hpd666.github.io/OrgenaEngine-Site/'">
       🚀 Launch
     </button>
-<button onclick="window.location.href='https://hpd666.github.io/OrgenaEngine-Site/.zip'" class="download-button">
-  Download OrgenaEngine ⬇️
-</button>
+<style>
+    /* Modern rectangular button styling */
+    .download-button {
+      display: inline-block;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #6c88f1, #8a9bff);
+      color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    /* Hover effect for modern feel */
+    .download-button:hover {
+      background: linear-gradient(135deg, #8a9bff, #6c88f1);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px);
+    }
+
+    /* Focus effect for accessibility */
+    .download-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #8a9bff;
+    }
+
+    /* Active effect for button press */
+    .download-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+
+<body>
+  <button onclick="window.location.href='https://hpd666.github.io/OrgenaEngine-Site/.zip'" class="download-button">
+    Download OrgenaEngine
+  </button>
 
 
     <section id="features">
