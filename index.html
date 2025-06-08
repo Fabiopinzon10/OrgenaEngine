@@ -19,7 +19,6 @@
     color: #fff;
     overflow-x: hidden;
   }
-  /* Animated notional background */
   body::before {
     content: '';
     position: fixed;
@@ -31,7 +30,6 @@
     animation: backgroundMove 60s linear infinite;
     z-index: -2;
   }
-
   @keyframes backgroundMove {
     0% {
       background-position: 20% 30%, 80% 60%, 50% 80%;
@@ -43,8 +41,6 @@
       background-position: 20% 30%, 80% 60%, 50% 80%;
     }
   }
-
-  /* Layout */
   main {
     max-width: 900px;
     margin: 120px auto 80px auto;
@@ -122,7 +118,6 @@
     border-top: 1px solid #222;
   }
 
-  /* Chat assistant styles */
   #chat-toggle {
     position: fixed;
     bottom: 25px;
@@ -210,7 +205,6 @@
   #chat-input button:active {
     opacity: 0.7;
   }
-  /* Scrollbar for chat log */
   #chat-log::-webkit-scrollbar {
     width: 8px;
   }
@@ -238,7 +232,7 @@
   }
   #cookie-consent p {
     margin-right: 15px;
-    max-width: 700px;
+    max-width: 600px;
   }
   #cookie-consent button {
     background: #00b7ff;
@@ -249,9 +243,69 @@
     font-weight: 700;
     cursor: pointer;
     user-select: none;
+    margin-left: 10px;
+    min-width: 80px;
   }
   #cookie-consent button:hover {
     background: #0093d1;
+  }
+
+  /* Modal overlay */
+  #cookie-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 11000;
+    justify-content: center;
+    align-items: center;
+  }
+  #cookie-modal .modal-content {
+    background: #1f2a38;
+    padding: 24px 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    color: #ccc;
+  }
+  #cookie-modal h3 {
+    margin-bottom: 16px;
+    color: white;
+  }
+  #cookie-modal label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 1rem;
+  }
+  #cookie-modal input[type=checkbox] {
+    transform: scale(1.3);
+    cursor: pointer;
+  }
+  #cookie-modal .buttons {
+    margin-top: 20px;
+    text-align: right;
+  }
+  #cookie-modal button {
+    background: #00b7ff;
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    margin-left: 12px;
+  }
+  #cookie-modal button:hover {
+    background: #0093d1;
+  }
+  #cookie-modal button.reject {
+    background: #cc4444;
+  }
+  #cookie-modal button.reject:hover {
+    background: #a03333;
   }
 </style>
 </head>
@@ -318,133 +372,199 @@
 
   <!-- Cookie Consent Banner -->
   <div id="cookie-consent" style="display:none;">
-    <p>We use cookies to improve your experience. By continuing to use this site, you accept our cookie policy.</p>
-    <button id="accept-cookies">Accept</button>
+    <p>We use cookies to enhance your experience. Manage your preferences or accept all.</p>
+    <div>
+      <button id="manage-cookies-btn">Manage Cookies</button>
+      <button id="accept-cookies-btn">Accept</button>
+      <button id="reject-cookies-btn" style="background:#cc4444;">Reject</button>
+    </div>
   </div>
 
-  <script>
-    // Chat Assistant Logic
-    const toggleBtn = document.getElementById('chat-toggle');
-    const chatBox = document.getElementById('chat-box');
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = chatBox.querySelector('button');
+  <!-- Cookie Modal -->
+  <div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <h3 id="modal-title">Manage Cookie Preferences</h3>
+      <form id="cookie-form">
+        <label>
+          Essential Cookies
+          <input type="checkbox" name="essential" checked disabled />
+        </label>
+        <label>
+          Analytics Cookies
+          <input type="checkbox" name="analytics" />
+        </label>
+        <label>
+          Marketing Cookies
+          <input type="checkbox" name="marketing" />
+        </label>
+        <div class="buttons">
+          <button type="button" id="modal-save-btn">Save Preferences</button>
+          <button type="button" id="modal-reject-btn" class="reject">Reject All</button>
+          <button type="button" id="modal-close-btn">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    toggleBtn.addEventListener('click', () => {
-      if (chatBox.style.display === 'flex') {
-        chatBox.style.display = 'none';
-      } else {
-        chatBox.style.display = 'flex';
-        userInput.focus();
+<script>
+  // Cookie helpers
+  function setCookie(name, value, days) {
+    const expires = days ? "; expires=" + new Date(Date.now() + days*864e5).toUTCString() : "";
+    document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax";
+  }
+  function getCookie(name) {
+    return document.cookie.split('; ').reduce((r, v) => {
+      const parts = v.split('=');
+      return parts[0] === name ? decodeURIComponent(parts[1]) : r
+    }, '');
+  }
+
+  // Check if user consented or rejected cookies
+  const cookieConsentBanner = document.getElementById('cookie-consent');
+  const modal = document.getElementById('cookie-modal');
+  const manageBtn = document.getElementById('manage-cookies-btn');
+  const acceptBtn = document.getElementById('accept-cookies-btn');
+  const rejectBtn = document.getElementById('reject-cookies-btn');
+
+  // Show banner only if no decision yet
+  if (!getCookie('cookie_consent')) {
+    cookieConsentBanner.style.display = 'flex';
+  }
+
+  manageBtn.onclick = () => {
+    modal.style.display = 'flex';
+  };
+  acceptBtn.onclick = () => {
+    setCookie('cookie_consent', JSON.stringify({
+      essential: true,
+      analytics: true,
+      marketing: true
+    }), 365);
+    cookieConsentBanner.style.display = 'none';
+  };
+  rejectBtn.onclick = () => {
+    setCookie('cookie_consent', JSON.stringify({
+      essential: true,
+      analytics: false,
+      marketing: false
+    }), 365);
+    cookieConsentBanner.style.display = 'none';
+  };
+
+  // Modal buttons
+  const saveBtn = document.getElementById('modal-save-btn');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const modalRejectBtn = document.getElementById('modal-reject-btn');
+  const cookieForm = document.getElementById('cookie-form');
+
+  saveBtn.onclick = () => {
+    const formData = new FormData(cookieForm);
+    const consent = {
+      essential: true,
+      analytics: formData.get('analytics') === 'on',
+      marketing: formData.get('marketing') === 'on'
+    };
+    setCookie('cookie_consent', JSON.stringify(consent), 365);
+    modal.style.display = 'none';
+    cookieConsentBanner.style.display = 'none';
+  };
+  closeBtn.onclick = () => {
+    modal.style.display = 'none';
+  };
+  modalRejectBtn.onclick = () => {
+    setCookie('cookie_consent', JSON.stringify({
+      essential: true,
+      analytics: false,
+      marketing: false
+    }), 365);
+    modal.style.display = 'none';
+    cookieConsentBanner.style.display = 'none';
+  };
+
+  // When modal opens, update checkboxes with current settings
+  manageBtn.addEventListener('click', () => {
+    const consentRaw = getCookie('cookie_consent');
+    if (consentRaw) {
+      try {
+        const consent = JSON.parse(consentRaw);
+        cookieForm.analytics.checked = !!consent.analytics;
+        cookieForm.marketing.checked = !!consent.marketing;
+      } catch {
+        cookieForm.analytics.checked = false;
+        cookieForm.marketing.checked = false;
       }
-    });
+    }
+  });
 
-    sendBtn.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', e => {
-      if (e.key === 'Enter') sendMessage();
-    });
+  // Close modal if clicking outside content
+  window.onclick = function(event) {
+    if(event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
 
-    function addMessage(sender, text) {
-      const div = document.createElement('div');
-      div.className = sender;
-      div.textContent = text;
-      chatLog.appendChild(div);
-      chatLog.scrollTop = chatLog.scrollHeight;
+  // Chat Assistant functionality
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatBox = document.getElementById('chat-box');
+  const chatLog = document.getElementById('chat-log');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = chatBox.querySelector('button');
+
+  chatToggle.addEventListener('click', () => {
+    if (chatBox.style.display === 'flex') {
+      chatBox.style.display = 'none';
+    } else {
+      chatBox.style.display = 'flex';
+      userInput.focus();
+    }
+  });
+
+  sendBtn.addEventListener('click', () => {
+    sendMessage();
+  });
+  userInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+
+  function appendMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = sender;
+    msgDiv.textContent = text;
+    chatLog.appendChild(msgDiv);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  function sendMessage() {
+    const text = userInput.value.trim();
+    if (!text) return;
+    appendMessage('user', text);
+    userInput.value = '';
+    setTimeout(() => {
+      getBotResponse(text);
+    }, 500);
+  }
+
+  function getBotResponse(input) {
+    input = input.toLowerCase();
+    let response = "Sorry, I didn't understand that. Try asking about features or support.";
+
+    if(input.includes('features')) {
+      response = "Orgena Engine supports 2D/3D rendering, physics, scripting, VR, multiplayer, and more.";
+    } else if(input.includes('license')) {
+      response = "Orgena Engine is fully open source under the MIT License.";
+    } else if(input.includes('community')) {
+      response = "We have an active GitHub repo and Discord server where contributors gather.";
+    } else if(input.includes('support')) {
+      response = "Check out our docs online or contact support@orgenastudio.com.";
+    } else if(input.includes('hello') || input.includes('hi')) {
+      response = "Hello! How can I assist you with Orgena Engine today?";
     }
 
-    function sendMessage() {
-      const msg = userInput.value.trim();
-      if (!msg) return;
-      addMessage('user', msg);
-      userInput.value = '';
-      // Delay bot response to simulate thinking
-      setTimeout(() => {
-        const response = getBotResponse(msg.toLowerCase());
-        addMessage('bot', response);
-      }, 400);
-    }
+    appendMessage('bot', response);
+  }
+</script>
 
-    const baseTopics = [
-      "2d rendering", "3d rendering", "asset management", "scene system", "animation", "physics engine",
-      "lighting system", "shader support", "scripting", "c++ support", "plugin system", "ui tools",
-      "audio engine", "input handling", "cross-platform", "vr support", "multiplayer", "networking",
-      "build system", "visual scripting", "performance", "gamepad support", "mobile export", "web export",
-      "linux support", "windows support", "macos support", "open source", "licensing", "engine size",
-      "startup time", "build speed", "debug tools", "code editor", "integrations", "version control",
-      "collaboration", "team features", "custom modules", "tilemap editor", "level editor", "post-processing",
-      "particles", "pathfinding", "ai features", "materials", "text rendering", "localization",
-      "navigation mesh", "memory usage", "profiling tools", "object pooling", "resource management"
-    ];
-
-    const allTopics = [];
-    for (let i = 1; i <= 25; i++) {
-      for (const t of baseTopics) {
-        allTopics.push(i === 1 ? t : `${t} ${i}`);
-      }
-    }
-
-    function getBotResponse(msg) {
-      if (msg.includes("what is orgena") || msg.includes("tell me about orgena"))
-        return "Orgena Studio is a powerful, open-source game engine for building 2D and 3D games.";
-      if (msg.includes("features"))
-        return "Orgena includes rendering, scripting, plugins, physics, audio, and much more.";
-      if (msg.includes("download") || msg.includes("launch"))
-        return "Click the 🚀 Launch button to go to the download page.";
-      if (msg.includes("creator") || msg.includes("who made"))
-        return "Orgena Studio is made for developers, artists, and indie creators.";
-      if (msg.includes("support"))
-        return "Currently, Orgena is community-supported through GitHub and documentation.";
-      if (msg.includes("terms") || msg.includes("license"))
-        return "You can find the terms of service and license info on our site.";
-      if (msg.includes("cookie"))
-        return "We use cookies to improve your experience. You can accept them at the bottom of the page.";
-
-      for (const topic of allTopics) {
-        if (msg.includes(topic)) {
-          return `Yes! Orgena Studio supports ${topic} out of the box. It's one of our core features!`;
-        }
-      }
-      return "I'm not sure about that yet, but I'm learning more about Orgena Studio every day!";
-    }
-
-    // Cookie Consent Logic
-    const cookieBanner = document.getElementById('cookie-consent');
-    const acceptBtn = document.getElementById('accept-cookies');
-    const cookieName = "orgena_cookie_consent";
-
-    function setCookie(name, value, days) {
-      const d = new Date();
-      d.setTime(d.getTime() + (days*24*60*60*1000));
-      const expires = "expires="+ d.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires + ";path=/";
-    }
-
-    function getCookie(name) {
-      const cname = name + "=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const ca = decodedCookie.split(';');
-      for(let c of ca) {
-        while (c.charAt(0) === ' ') c = c.substring(1);
-        if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
-      }
-      return "";
-    }
-
-    function checkCookieConsent() {
-      if(getCookie(cookieName) === "accepted") {
-        cookieBanner.style.display = "none";
-      } else {
-        cookieBanner.style.display = "flex";
-      }
-    }
-
-    acceptBtn.addEventListener('click', () => {
-      setCookie(cookieName, "accepted", 365);
-      cookieBanner.style.display = "none";
-    });
-
-    checkCookieConsent();
-
-  </script>
 </body>
 </html>
