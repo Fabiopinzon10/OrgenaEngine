@@ -1,62 +1,226 @@
-<body bgcolor="black">
-  <title>Build Unlimited Dreams</title>
-  <!-- Promotion Site -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Orgena Engine – A powerful open source game engine.">
+  <title>Orgena Engine</title>
   <style>
-.welcome {
-  font-size:50px;
-  margin-top:50px;
-  text-align:center;
-  font-family:monospace;
-}
-</style>
-    
-<h1></h1><center><div class="welcome"><font color="#FFFFFF">Unlimited Right To Build</font></div></center></h1>
-  <style>
-  #launch-button {
-    position: absolute;
-    bottom: 80px; /* Increased distance from bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
-    background: #0e639c;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s, transform 0.2s;
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0e1116, #1f2a38);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
 
-  #launch-button:hover {
-    background: #1177bb;
-    transform: translateX(-50%) scale(1.05);
-  }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #00b7ff, #7f00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  #launch-button:active {
-    transform: translateX(-50%) scale(0.97);
-  }
-</style>
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      color: #d0d0d0;
+      max-width: 600px;
+    }
 
-<button id="launch-button" aria-label="Launch the Orgena Engine site">
-  🚀 Launch
-</button>
+    #launch-button {
+      padding: 15px 32px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background: #0e639c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.2s;
+    }
 
-<script>
-  document.getElementById("launch-button").addEventListener("click", () => {
-    window.location.href = "https://hpd666.github.io/OrgenaEngine-Site/";
-  });
-</script>
+    #launch-button:hover {
+      background: #1177bb;
+      transform: scale(1.05);
+    }
 
-</script>
-        
+    #launch-button:active {
+      transform: scale(0.97);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    #chat-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #00b7ff;
+      color: white;
+      font-size: 28px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    #chat-box {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      bottom: 100px;
+      right: 25px;
+      width: 300px;
+      height: 400px;
+      background: #1f2a38;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      z-index: 998;
+      overflow: hidden;
+    }
+
+    #chat-header {
+      background: #00b7ff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    #chat-log {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    #chat-log div {
+      margin-bottom: 10px;
+    }
+
+    .user { text-align: right; color: #8dcaff; }
+    .bot { text-align: left; color: #a0ffa0; }
+
+    #chat-input {
+      display: flex;
+      border-top: 1px solid #444;
+    }
+
+    #chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: #2c3b4f;
+      color: white;
+    }
+
+    #chat-input button {
+      background: #00b7ff;
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>Orgena Engine</h1>
+    <p>Build powerful, open-source games with Orgena Engine – a modern, lightweight solution for 2D/3D development. Lightning fast. Completely free. Built for creators.</p>
+    <button id="launch-button" onclick="window.location.href='https://hpd666.github.io/OrgenaEngine-Site/';">
+      🚀 Launch
+    </button>
+  </main>
+
+  <footer>
+    &copy; 2025 Orgena Engine. All rights reserved.
+  </footer>
+
+  <!-- Chat Assistant -->
+  <button id="chat-toggle">💬</button>
+  <div id="chat-box">
+    <div id="chat-header">Orgena Assistant</div>
+    <div id="chat-log">
+      <div class="bot">Hi! Ask me anything about Orgena Studio.</div>
+    </div>
+    <div id="chat-input">
+      <input type="text" id="user-input" placeholder="Type your question..."/>
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('chat-toggle');
+    const chatBox = document.getElementById('chat-box');
+    const chatLog = document.getElementById('chat-log');
+    const input = document.getElementById('user-input');
+
+    toggle.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    function sendMessage() {
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      addMessage('user', msg);
+      input.value = '';
+
+      setTimeout(() => {
+        const response = getBotResponse(msg.toLowerCase());
+        addMessage('bot', response);
+      }, 400);
+    }
+
+    function addMessage(sender, text) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = sender;
+      msgDiv.textContent = text;
+      chatLog.appendChild(msgDiv);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function getBotResponse(msg) {
+      // Basic known questions
+      if (msg.includes("what is orgena")) return "Orgena Studio is a powerful, open-source game engine for building 2D and 3D games.";
+      if (msg.includes("features")) return "Orgena includes 2D/3D rendering, visual scripting, modular plugins, and blazing performance.";
+      if (msg.includes("download")) return "Click the 🚀 Launch button to go to the download page.";
+      if (msg.includes("creator")) return "Orgena Studio is made for developers, artists, and indie creators.";
+      if (msg.includes("support")) return "Currently, Orgena is community-supported through GitHub and documentation.";
+      
+      // Auto-generated keyword responses
+      for (let i = 1; i <= 1200; i++) {
+        if (msg.includes("keyword" + i)) {
+          return `You're asking about keyword${i}? Orgena Studio definitely has tools to help you with that! (Response ${i})`;
+        }
+      }
+
+      return "I'm not sure about that yet, but I'm learning more about Orgena Studio every day!";
+    }
+
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+
 </body>
-<body bgcolor="grey">
-  
-<h2> More Information </h2>
-
-
-
-  
-</body>
+</html>
